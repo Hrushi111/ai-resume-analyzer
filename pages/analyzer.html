@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analyze Resume – ResumeAI</title>
+    <meta name="description"
+        content="Upload your resume and paste a job description to get your AI-powered ATS match score and skill gap analysis." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <!-- ===== AMBIENT ORBS ===== -->
+    <div class="ambient-orb orb-purple"></div>
+    <div class="ambient-orb orb-warm"></div>
+    <div class="ambient-orb orb-teal"></div>
+    <div class="particles" id="particles"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="nav-logo">
+                <div class="logo-icon"><svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#alg3)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="alg3" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg></div>
+                <span>Resume<strong>AI</strong></span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-label">Main</div>
+                <a href="dashboard.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                    </svg>
+                    Dashboard
+                </a>
+                <a href="analyzer.html" class="nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
+                    </svg>
+                    Analyze Resume
+                </a>
+                <a href="history.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    History
+                </a>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-label">Account</div>
+                <a href="profile.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    My Profile
+                </a>
+                <a href="#" class="nav-item" id="logoutBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>
+                    Logout
+                </a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="user-avatar" id="userAvatarSidebar">U</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">Loading...</div>
+                    <div class="user-role" id="sidebarUserRole">User</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+            </button>
+            <div class="topbar-left">
+                <h1 class="page-title">Resume Analyzer</h1>
+                <span class="page-subtitle">Upload your resume and match it against any job description</span>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- INPUT SECTION -->
+            <div class="analyzer-layout" id="inputSection">
+                <!-- Left: Resume Upload -->
+                <div class="analyzer-input-panel">
+                    <div class="panel-header">
+                        <div class="panel-step">Step 1</div>
+                        <h3>Upload Your Resume</h3>
+                        <p>Upload your resume in PDF or DOCX format, or paste your resume text directly.</p>
+                    </div>
+
+                    <div class="upload-tabs">
+                        <button class="upload-tab active" id="tabUpload" data-tab="upload">📎 Upload File</button>
+                        <button class="upload-tab" id="tabPaste" data-tab="paste">📝 Paste Text</button>
+                    </div>
+
+                    <div id="uploadPane">
+                        <div class="upload-zone" id="uploadZone">
+                            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx,.txt" title="Upload Resume" />
+                            <div class="upload-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                            </div>
+                            <h3>Drop your resume here</h3>
+                            <p>Supports PDF, DOCX, DOC, TXT</p>
+                            <span class="upload-hint">or click to browse files</span>
+                        </div>
+                        <div class="file-preview" id="filePreview">
+                            <span class="file-preview-icon">📄</span>
+                            <div class="file-preview-info">
+                                <div class="file-preview-name" id="fileName">resume.pdf</div>
+                                <div class="file-preview-size" id="fileSize">256 KB</div>
+                            </div>
+                            <button class="btn btn-danger btn-sm" id="removeFile">Remove</button>
+                        </div>
+                    </div>
+
+                    <div id="pastePane" class="hidden">
+                        <div class="form-group">
+                            <label for="resumeText">Paste Resume Content</label>
+                            <textarea id="resumeText" class="form-control" rows="12"
+                                placeholder="Paste your full resume text here...&#10;&#10;Include your:&#10;• Work Experience&#10;• Skills&#10;• Education&#10;• Projects"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Job Description -->
+                <div class="analyzer-input-panel">
+                    <div class="panel-header">
+                        <div class="panel-step">Step 2</div>
+                        <h3>Paste Job Description</h3>
+                        <p>Copy and paste the full job description for the role you're targeting.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title (Optional)</label>
+                        <input type="text" id="jobTitle" class="form-control"
+                            placeholder="e.g., Senior Software Engineer" />
+                    </div>
+
+                    <div class="form-group" style="margin-top:14px">
+                        <label for="jobDescription">Job Description</label>
+                        <textarea id="jobDescription" class="form-control" rows="12"
+                            placeholder="Paste the full job description here...&#10;&#10;Include:&#10;• Required Skills&#10;• Responsibilities&#10;• Qualifications&#10;• Experience Requirements"></textarea>
+                    </div>
+
+                    <div class="sample-jd-section">
+                        <p>Try a sample:</p>
+                        <div class="sample-chips">
+                            <button class="sample-chip" data-role="software_engineer">Software Engineer</button>
+                            <button class="sample-chip" data-role="data_scientist">Data Scientist</button>
+                            <button class="sample-chip" data-role="product_manager">Product Manager</button>
+                            <button class="sample-chip" data-role="devops">DevOps Engineer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANALYZE BUTTON -->
+            <div class="analyze-btn-row" id="analyzeBtnRow">
+                <button class="btn btn-primary btn-large analyze-main-btn" id="analyzeBtn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35" />
+                    </svg>
+                    <span id="analyzeBtnText">Analyze My Resume</span>
+                    <div class="btn-spinner hidden" id="analyzeSpinner"></div>
+                </button>
+                <p class="analyze-note">Our AI will use TF-IDF scoring and NLP to analyze your resume against the job
+                    description</p>
+            </div>
+
+            <!-- LOADING STATE -->
+            <div class="analyze-loading hidden" id="analyzeLoading">
+                <div class="loading-steps">
+                    <div class="loading-step" id="ls1">
+                        <div class="ls-icon">⚙️</div>
+                        <div class="ls-info">
+                            <div class="ls-title">Extracting Resume Text</div>
+                            <div class="ls-bar">
+                                <div class="ls-fill" id="lf1"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-step" id="ls2">
+                        <div class="ls-icon">🔍</div>
+                        <div class="ls-info">
+                            <div class="ls-title">Identifying Skills & Keywords</div>
+                            <div class="ls-bar">
+                                <div class="ls-fill" id="lf2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-step" id="ls3">
+                        <div class="ls-icon">🧮</div>
+                        <div class="ls-info">
+                            <div class="ls-title">Running TF-IDF Analysis</div>
+                            <div class="ls-bar">
+                                <div class="ls-fill" id="lf3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loading-step" id="ls4">
+                        <div class="ls-icon">📊</div>
+                        <div class="ls-info">
+                            <div class="ls-title">Generating Score & Suggestions</div>
+                            <div class="ls-bar">
+                                <div class="ls-fill" id="lf4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESULTS SECTION -->
+            <div class="results-full hidden" id="resultsSection">
+                <div class="results-header">
+                    <div>
+                        <h2>Analysis Results</h2>
+                        <p id="resultsJobTitle" class="results-subtitle">Job Role Analysis</p>
+                    </div>
+                    <div class="results-actions">
+                        <button class="btn btn-ghost" id="newAnalysisBtn">New Analysis</button>
+                        <button class="btn btn-primary" id="downloadReportBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            </svg>
+                            Download Report
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Score Overview -->
+                <div class="results-overview">
+                    <div class="score-ring-large">
+                        <svg viewBox="0 0 160 160">
+                            <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(108,99,255,0.12)"
+                                stroke-width="12" />
+                            <circle cx="80" cy="80" r="68" fill="none" stroke="url(#rg1)" stroke-width="12"
+                                stroke-linecap="round" stroke-dasharray="427" stroke-dashoffset="427"
+                                transform="rotate(-90 80 80)" id="mainScoreArc" class="score-arc-animated" />
+                            <defs>
+                                <linearGradient id="rg1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#6C63FF" />
+                                    <stop offset="100%" stop-color="#3ECFCF" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="score-ring-large-center">
+                            <div class="score-big-val" id="mainScoreVal">0</div>
+                            <div class="score-big-pct">%</div>
+                            <div class="score-big-label">ATS Match</div>
+                        </div>
+                    </div>
+
+                    <div class="score-breakdown">
+                        <div class="breakdown-title">Score Breakdown</div>
+                        <div class="breakdown-item">
+                            <span class="bi-label">Skills Match</span>
+                            <div class="progress-bar" style="flex:1">
+                                <div class="progress-fill" id="skillScoreFill" style="width:0%"></div>
+                            </div>
+                            <span class="bi-val" id="skillScoreVal">0%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="bi-label">Keyword Relevance</span>
+                            <div class="progress-bar" style="flex:1">
+                                <div class="progress-fill" id="keywordScoreFill" style="width:0%"></div>
+                            </div>
+                            <span class="bi-val" id="keywordScoreVal">0%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="bi-label">Experience Match</span>
+                            <div class="progress-bar" style="flex:1">
+                                <div class="progress-fill" id="expScoreFill" style="width:0%"></div>
+                            </div>
+                            <span class="bi-val" id="expScoreVal">0%</span>
+                        </div>
+                        <div class="breakdown-item">
+                            <span class="bi-label">Education Match</span>
+                            <div class="progress-bar" style="flex:1">
+                                <div class="progress-fill" id="eduScoreFill" style="width:0%"></div>
+                            </div>
+                            <span class="bi-val" id="eduScoreVal">0%</span>
+                        </div>
+
+                        <div class="grade-display" id="gradeDisplay">
+                            <div class="grade-badge" id="gradeBadge">Good</div>
+                            <p id="gradeDesc">Your resume is a good match for this role. Minor improvements could push
+                                you into the excellent range.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="results-grid">
+                    <!-- Matched Skills -->
+                    <div class="result-card">
+                        <div class="rc-header">
+                            <span class="rc-icon">✅</span>
+                            <h4>Matched Skills <span class="rc-count" id="matchedCount">0</span></h4>
+                        </div>
+                        <div class="skills-chips" id="matchedSkillsList"></div>
+                    </div>
+
+                    <!-- Missing Skills -->
+                    <div class="result-card">
+                        <div class="rc-header">
+                            <span class="rc-icon">❌</span>
+                            <h4>Missing Skills <span class="rc-count missing" id="missingCount">0</span></h4>
+                        </div>
+                        <div class="skills-chips" id="missingSkillsList"></div>
+                    </div>
+
+                    <!-- Matched Keywords -->
+                    <div class="result-card">
+                        <div class="rc-header">
+                            <span class="rc-icon">🔑</span>
+                            <h4>Matching Keywords <span class="rc-count" id="keywordMatchCount">0</span></h4>
+                        </div>
+                        <div class="skills-chips" id="keywordMatchList"></div>
+                    </div>
+
+                    <!-- Missing Keywords -->
+                    <div class="result-card">
+                        <div class="rc-header">
+                            <span class="rc-icon">🔍</span>
+                            <h4>Missing Keywords <span class="rc-count missing" id="keywordMissCount">0</span></h4>
+                        </div>
+                        <div class="skills-chips" id="keywordMissList"></div>
+                    </div>
+                </div>
+
+                <!-- Improvement Suggestions -->
+                <div class="suggestions-card">
+                    <h3>💡 AI-Powered Improvement Suggestions</h3>
+                    <div class="suggestions-list" id="suggestionsList"></div>
+                </div>
+
+                <!-- Course Recommendations -->
+                <div class="courses-card">
+                    <h3>📚 Recommended Courses to Bridge Your Skill Gaps</h3>
+                    <div class="courses-grid" id="coursesList"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/nlp-engine.js"></script>
+    <script src="../js/analyzer.js"></script>
+</body>
+
+</html>

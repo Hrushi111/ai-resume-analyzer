@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard – ResumeAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="nav-logo">
+                <div class="logo-icon"><svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#adlg)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="adlg" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg></div><span>Resume<strong>AI</strong></span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-label">Admin Panel</div>
+                <a href="admin.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 17v-2m3 2v-4m3 4v-6M5 20h14a2 2 0 002-2V7l-5-5H5a2 2 0 00-2 2v13a2 2 0 002 2z" />
+                    </svg>Analytics Dashboard</a>
+                <a href="dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                    </svg>User Dashboard</a>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-label">Management</div>
+                <a href="history.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>All Analyses</a>
+                <a href="#" class="nav-item" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>Logout</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="user-avatar" style="background:linear-gradient(135deg,#F7971E,#FFD200)"
+                    id="userAvatarSidebar">A</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">Admin</div>
+                    <div class="user-role" style="color:var(--warning)">Administrator</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" width="22" height="22">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg></button>
+            <div class="topbar-left">
+                <h1 class="page-title">Admin Dashboard</h1>
+                <span class="page-subtitle" id="adminWelcome">Platform Overview & Analytics</span>
+            </div>
+            <div class="topbar-actions">
+                <span class="badge badge-warning" style="padding:6px 14px;font-size:0.8rem">🛡️ Admin Access</span>
+            </div>
+        </header>
+
+        <div class="dashboard-body">
+            <!-- Admin Stats -->
+            <div class="admin-stats">
+                <div class="summary-card">
+                    <div class="summary-icon" style="--ic:#6C63FF"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                        </svg></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="adminTotalUsers">0</div>
+                        <div class="summary-label">Total Users</div>
+                    </div>
+                    <div class="summary-trend up" id="adminNewUsers">+0 today</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="--ic:#43E97B"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="adminTotalAnalyses">0</div>
+                        <div class="summary-label">Total Analyses</div>
+                    </div>
+                    <div class="summary-trend up">All time</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="--ic:#3ECFCF"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="adminAvgScore">--%</div>
+                        <div class="summary-label">Platform Avg Score</div>
+                    </div>
+                    <div class="summary-trend neutral">Across all users</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon" style="--ic:#FF6584"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg></div>
+                    <div class="summary-info">
+                        <div class="summary-value" id="adminTopSkill">--</div>
+                        <div class="summary-label">Top Missing Skill</div>
+                    </div>
+                    <div class="summary-trend down">Most common gap</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Score Distribution</h3><span class="chart-subtitle">User ATS score ranges</span>
+                    </div>
+                    <div class="chart-wrap"><canvas id="scoreDistChart"></canvas></div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Top Missing Skills</h3><span class="chart-subtitle">Most common skill gaps</span>
+                    </div>
+                    <div class="chart-wrap"><canvas id="skillsGapChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Registered Users <span id="userCountBadge" class="badge badge-primary">0</span></h3>
+                    <input type="text" id="searchUsers" class="form-control" placeholder="Search users..."
+                        style="max-width:220px;padding:7px 12px;font-size:0.82rem" />
+                </div>
+                <div id="usersTableContainer"></div>
+            </div>
+
+            <!-- All Analyses Table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>Recent Platform Analyses</h3>
+                    <a href="history.html" class="btn btn-ghost btn-sm">View All</a>
+                </div>
+                <div id="adminAnalysesContainer"></div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = requireAuth(true);
+            if (!user) return;
+            document.getElementById('sidebarUserName').textContent = user.name;
+            document.getElementById('adminWelcome').textContent = `Welcome, ${user.name.split(' ')[0]}! Platform Overview`;
+            document.getElementById('logoutBtn').addEventListener('click', e => { e.preventDefault(); Store.remove('ra_current_user'); window.location.href = '../index.html'; });
+            const sidebar = document.getElementById('sidebar');
+            document.getElementById('sidebarToggle')?.addEventListener('click', () => sidebar.classList.toggle('open'));
+            document.getElementById('sidebarClose')?.addEventListener('click', () => sidebar.classList.remove('open'));
+
+            // Load data
+            const allUsers = getUsers();
+            const allAnalyses = Store.get('ra_analyses', []);
+
+            // Stats
+            document.getElementById('adminTotalUsers').textContent = allUsers.length;
+            document.getElementById('adminTotalAnalyses').textContent = allAnalyses.length;
+            document.getElementById('userCountBadge').textContent = allUsers.length;
+
+            const todayUsers = allUsers.filter(u => u.joinDate && new Date(u.joinDate).toDateString() === new Date().toDateString()).length;
+            document.getElementById('adminNewUsers').textContent = `+${todayUsers} today`;
+
+            if (allAnalyses.length > 0) {
+                const avg = Math.round(allAnalyses.reduce((s, a) => s + a.overallScore, 0) / allAnalyses.length);
+                document.getElementById('adminAvgScore').textContent = avg + '%';
+
+                // Top missing skill
+                const skillFreq = {};
+                allAnalyses.forEach(a => (a.missingSkills || []).forEach(s => { skillFreq[s] = (skillFreq[s] || 0) + 1; }));
+                const topSkill = Object.entries(skillFreq).sort((a, b) => b[1] - a[1])[0];
+                document.getElementById('adminTopSkill').textContent = topSkill ? topSkill[0] : '--';
+
+                // Score distribution chart
+                const ranges = { '0-49': 0, '50-69': 0, '70-84': 0, '85-100': 0 };
+                allAnalyses.forEach(a => {
+                    if (a.overallScore < 50) ranges['0-49']++;
+                    else if (a.overallScore < 70) ranges['50-69']++;
+                    else if (a.overallScore < 85) ranges['70-84']++;
+                    else ranges['85-100']++;
+                });
+                new Chart(document.getElementById('scoreDistChart'), {
+                    type: 'bar',
+                    data: { labels: Object.keys(ranges), datasets: [{ label: 'Users', data: Object.values(ranges), backgroundColor: ['rgba(255,71,87,0.7)', 'rgba(247,151,30,0.7)', 'rgba(62,207,207,0.7)', 'rgba(67,233,123,0.7)'], borderRadius: 6 }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15,15,35,0.95)', borderColor: 'rgba(108,99,255,0.3)', borderWidth: 1 } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#555' } }, y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#555', stepSize: 1 } } } }
+                });
+
+                // Top skills gap chart
+                const topSkills = Object.entries(skillFreq).sort((a, b) => b[1] - a[1]).slice(0, 8);
+                new Chart(document.getElementById('skillsGapChart'), {
+                    type: 'bar',
+                    data: { labels: topSkills.map(([k]) => k), datasets: [{ label: 'Frequency', data: topSkills.map(([, v]) => v), backgroundColor: 'rgba(108,99,255,0.7)', borderRadius: 6 }] },
+                    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { backgroundColor: 'rgba(15,15,35,0.95)', borderColor: 'rgba(108,99,255,0.3)', borderWidth: 1 } }, scales: { x: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#555', stepSize: 1 } }, y: { grid: { color: 'rgba(255,255,255,0.04)' }, ticks: { color: '#555', font: { size: 11 } } } } }
+                });
+            } else {
+                document.getElementById('adminAvgScore').textContent = '--';
+            }
+
+            // Users table
+            renderUsersTable(allUsers);
+            document.getElementById('searchUsers').addEventListener('input', e => {
+                renderUsersTable(allUsers.filter(u => u.name.toLowerCase().includes(e.target.value.toLowerCase()) || u.email.toLowerCase().includes(e.target.value.toLowerCase())));
+            });
+
+            function renderUsersTable(users) {
+                const el = document.getElementById('usersTableContainer');
+                let html = `<table class="analysis-table"><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Analyses</th><th>Actions</th></tr></thead><tbody>`;
+                users.forEach(u => {
+                    const userAnalyses = allAnalyses.filter(a => a.userId === u.id).length;
+                    html += `<tr>
+          <td><div style="display:flex;align-items:center;gap:8px"><div class="user-avatar" style="width:28px;height:28px;font-size:0.75rem">${u.name[0]}</div><strong>${u.name}</strong></div></td>
+          <td style="color:var(--text-muted)">${u.email}</td>
+          <td><span class="badge ${u.role === 'admin' ? 'badge-warning' : 'badge-primary'}">${u.role}</span></td>
+          <td><span class="badge badge-primary">${userAnalyses}</span></td>
+          <td><button class="btn btn-ghost btn-sm" onclick="alert('User: ${u.name}\\nEmail: ${u.email}\\nRole: ${u.role}\\nAnalyses: ${userAnalyses}')">View</button></td>
+        </tr>`;
+                });
+                html += `</tbody></table>`;
+                el.innerHTML = html;
+            }
+
+            // Recent analyses
+            const recentA = allAnalyses.slice(-8).reverse();
+            const el = document.getElementById('adminAnalysesContainer');
+            if (recentA.length === 0) { el.innerHTML = `<div class="empty-state-dash"><div class="empty-icon">📊</div><h4>No platform analyses yet</h4></div>`; }
+            else {
+                const scoreClass = s => s >= 75 ? 'high' : s >= 50 ? 'medium' : 'low';
+                let html = `<table class="analysis-table"><thead><tr><th>Job Role</th><th>User ID</th><th>Date</th><th>ATS Score</th><th>Missing skills</th></tr></thead><tbody>`;
+                recentA.forEach(a => {
+                    html += `<tr><td><strong>${a.jobTitle || 'Untitled'}</strong></td><td style="font-size:0.8rem;color:var(--text-muted)">${a.userId}</td><td style="font-size:0.8rem">${formatDate(a.date)}</td><td><span class="score-pill ${scoreClass(a.overallScore)}">${a.overallScore}%</span></td><td>${a.missingSkills?.length || 0}</td></tr>`;
+                });
+                html += `</tbody></table>`;
+                el.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analysis History – ResumeAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="nav-logo">
+                <div class="logo-icon"><svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#hlg)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="hlg" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg></div><span>Resume<strong>AI</strong></span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-label">Main</div>
+                <a href="dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                    </svg>Dashboard</a>
+                <a href="analyzer.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
+                    </svg>Analyze Resume</a>
+                <a href="history.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>History</a>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-label">Account</div>
+                <a href="profile.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>My Profile</a>
+                <a href="#" class="nav-item" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>Logout</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="user-avatar" id="userAvatarSidebar">U</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">Loading...</div>
+                    <div class="user-role" id="sidebarUserRole">User</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" width="22" height="22">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg></button>
+            <div class="topbar-left">
+                <h1 class="page-title">Analysis History</h1><span class="page-subtitle">All your past resume
+                    analyses</span>
+            </div>
+            <div class="topbar-actions"><a href="analyzer.html" class="btn btn-primary"><svg viewBox="0 0 24 24"
+                        fill="currentColor" width="16" height="16">
+                        <path d="M12 4v16m8-8H4" />
+                    </svg>New Analysis</a></div>
+        </header>
+        <div class="dashboard-body">
+            <!-- Filters -->
+            <div class="history-filters">
+                <input type="text" id="searchHistory" class="form-control" placeholder="Search by job role..."
+                    style="max-width:280px;" />
+                <select id="sortHistory" class="form-control" style="max-width:180px;">
+                    <option value="date_desc">Newest First</option>
+                    <option value="date_asc">Oldest First</option>
+                    <option value="score_desc">Highest Score</option>
+                    <option value="score_asc">Lowest Score</option>
+                </select>
+                <button class="btn btn-danger btn-sm" id="clearHistory">Clear All History</button>
+            </div>
+
+            <!-- History table -->
+            <div class="table-card">
+                <div class="table-header">
+                    <h3>All Analyses <span id="historyCount" class="badge badge-primary">0</span></h3>
+                    <span style="font-size:0.8rem;color:var(--text-muted)" id="historyRange"></span>
+                </div>
+                <div id="historyTableContainer">
+                    <div class="empty-state-dash">
+                        <div class="empty-icon">🕐</div>
+                        <h4>No analysis history yet</h4>
+                        <p>Your past analyses will appear here once you start analyzing resumes.</p>
+                        <a href="analyzer.html" class="btn btn-primary">Analyze My Resume</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress over time card -->
+            <div class="table-card" id="progressCard" style="display:none">
+                <div class="table-header">
+                    <h3>Score Progress Over Time</h3>
+                </div>
+                <div style="padding:20px">
+                    <div id="progressBars"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = requireAuth();
+            if (!user) return;
+            document.getElementById('sidebarUserName').textContent = user.name;
+            document.getElementById('sidebarUserRole').textContent = user.role === 'admin' ? 'Administrator' : 'User';
+            document.getElementById('userAvatarSidebar').textContent = user.name[0].toUpperCase();
+            document.getElementById('logoutBtn').addEventListener('click', e => { e.preventDefault(); Store.remove('ra_current_user'); window.location.href = '../index.html'; });
+            const sidebar = document.getElementById('sidebar');
+            document.getElementById('sidebarToggle')?.addEventListener('click', () => sidebar.classList.toggle('open'));
+            document.getElementById('sidebarClose')?.addEventListener('click', () => sidebar.classList.remove('open'));
+
+            let analyses = Store.get('ra_analyses', []).filter(a => user.role === 'admin' || a.userId === user.id);
+            renderHistory(analyses);
+
+            // Search
+            document.getElementById('searchHistory').addEventListener('input', e => {
+                let filtered = analyses.filter(a => (a.jobTitle || '').toLowerCase().includes(e.target.value.toLowerCase()));
+                renderHistory(filtered);
+            });
+
+            // Sort
+            document.getElementById('sortHistory').addEventListener('change', e => {
+                let sorted = [...analyses];
+                if (e.target.value === 'date_asc') sorted.sort((a, b) => new Date(a.date) - new Date(b.date));
+                else if (e.target.value === 'date_desc') sorted.sort((a, b) => new Date(b.date) - new Date(a.date));
+                else if (e.target.value === 'score_desc') sorted.sort((a, b) => b.overallScore - a.overallScore);
+                else if (e.target.value === 'score_asc') sorted.sort((a, b) => a.overallScore - b.overallScore);
+                renderHistory(sorted);
+            });
+
+            // Clear
+            document.getElementById('clearHistory').addEventListener('click', () => {
+                if (!confirm('Clear all your analysis history? This cannot be undone.')) return;
+                const all = Store.get('ra_analyses', []);
+                Store.set('ra_analyses', all.filter(a => a.userId !== user.id));
+                analyses = [];
+                renderHistory([]);
+                showToast('History cleared.', 'info');
+            });
+
+            function renderHistory(list) {
+                const container = document.getElementById('historyTableContainer');
+                document.getElementById('historyCount').textContent = list.length;
+                if (list.length === 0) {
+                    container.innerHTML = `<div class="empty-state-dash"><div class="empty-icon">🕐</div><h4>No analyses found</h4><p>Try adjusting your search or <a href="analyzer.html" class="auth-link">run a new analysis</a>.</p></div>`;
+                    document.getElementById('progressCard').style.display = 'none';
+                    return;
+                }
+                const scoreClass = s => s >= 75 ? 'high' : s >= 50 ? 'medium' : 'low';
+                let html = `<table class="analysis-table"><thead><tr><th>#</th><th>Job Role</th><th>Date & Time</th><th>ATS Score</th><th>Skills Match</th><th>Missing Skills</th><th>Action</th></tr></thead><tbody>`;
+                list.slice().reverse().forEach((a, i) => {
+                    html += `<tr>
+          <td style="color:var(--text-muted)">${i + 1}</td>
+          <td><strong>${a.jobTitle || 'Untitled Analysis'}</strong></td>
+          <td style="font-size:0.8rem">${new Date(a.date).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</td>
+          <td><span class="score-pill ${scoreClass(a.overallScore)}">${a.overallScore}%</span></td>
+          <td><span class="score-pill ${scoreClass(a.skillsScore || 0)}">${a.skillsScore || '--'}%</span></td>
+          <td><span class="badge badge-danger">${a.missingSkills?.length || 0}</span></td>
+          <td><button class="btn btn-ghost btn-sm" onclick="viewDetails('${a.id}')">Details</button></td>
+        </tr>`;
+                });
+                html += `</tbody></table>`;
+                container.innerHTML = html;
+
+                // Progress visualization
+                document.getElementById('progressCard').style.display = 'block';
+                const bars = list.slice(-6).reverse();
+                document.getElementById('progressBars').innerHTML = bars.map(a => `
+        <div style="margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;font-size:0.82rem;margin-bottom:4px">
+            <span style="color:var(--text-secondary)">${a.jobTitle || 'Analysis'}</span>
+            <strong>${a.overallScore}%</strong>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${a.overallScore}%"></div></div>
+        </div>
+      `).join('');
+            }
+
+            window.viewDetails = (id) => {
+                const a = analyses.find(x => x.id === id);
+                if (!a) return;
+                const scoreClass = s => s >= 75 ? 'grade-excellent' : s >= 70 ? 'grade-good' : s >= 50 ? 'grade-average' : 'grade-poor';
+                const grade = a.overallScore >= 85 ? 'Excellent' : a.overallScore >= 70 ? 'Good' : a.overallScore >= 50 ? 'Average' : 'Needs Work';
+                showToast(`${a.jobTitle}: Score ${a.overallScore}% (${grade})`, 'info', 6000);
+            };
+        });
+    </script>
+    <style>
+        .history-filters {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile – ResumeAI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="../index.html" class="nav-logo">
+                <div class="logo-icon"><svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#plg)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="plg" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg></div><span>Resume<strong>AI</strong></span>
+            </a>
+            <button class="sidebar-close" id="sidebarClose">✕</button>
+        </div>
+        <nav class="sidebar-nav">
+            <div class="nav-group">
+                <div class="nav-group-label">Main</div>
+                <a href="dashboard.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="3" width="7" height="7" rx="1" />
+                        <rect x="14" y="14" width="7" height="7" rx="1" />
+                        <rect x="3" y="14" width="7" height="7" rx="1" />
+                    </svg>Dashboard</a>
+                <a href="analyzer.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
+                    </svg>Analyze Resume</a>
+                <a href="history.html" class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>History</a>
+            </div>
+            <div class="nav-group">
+                <div class="nav-group-label">Account</div>
+                <a href="profile.html" class="nav-item active"><svg viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>My Profile</a>
+                <a href="#" class="nav-item" id="logoutBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" />
+                    </svg>Logout</a>
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-user">
+                <div class="user-avatar" id="userAvatarSidebar">U</div>
+                <div class="user-info">
+                    <div class="user-name" id="sidebarUserName">Loading...</div>
+                    <div class="user-role" id="sidebarUserRole">User</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <button class="sidebar-toggle" id="sidebarToggle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" width="22" height="22">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg></button>
+            <div class="topbar-left">
+                <h1 class="page-title">My Profile</h1><span class="page-subtitle">Manage your account information</span>
+            </div>
+        </header>
+        <div class="dashboard-body">
+            <div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;align-items:start">
+                <!-- Profile Card -->
+                <div class="card" style="text-align:center;padding:32px">
+                    <div class="user-avatar" id="profileAvatar"
+                        style="width:80px;height:80px;font-size:2rem;margin:0 auto 16px;border:3px solid rgba(108,99,255,0.3)">
+                        U</div>
+                    <h3 id="profileName" style="font-size:1.2rem;margin-bottom:4px">Loading...</h3>
+                    <p id="profileEmail" style="color:var(--text-muted);font-size:0.85rem;margin-bottom:8px">...</p>
+                    <span id="profileRoleBadge" class="badge badge-primary">User</span>
+                    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+                        <div style="display:flex;justify-content:center;gap:24px">
+                            <div style="text-align:center">
+                                <div id="profileAnalyses"
+                                    style="font-size:1.4rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+                                    0</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted)">Analyses</div>
+                            </div>
+                            <div style="text-align:center">
+                                <div id="profileAvgScore"
+                                    style="font-size:1.4rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+                                    --</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted)">Avg Score</div>
+                            </div>
+                            <div style="text-align:center">
+                                <div id="profileBestScore"
+                                    style="font-size:1.4rem;font-weight:800;background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent">
+                                    --</div>
+                                <div style="font-size:0.72rem;color:var(--text-muted)">Best Score</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Profile -->
+                <div class="card">
+                    <h3 style="margin-bottom:20px;font-size:1rem;font-weight:700">Edit Profile</h3>
+                    <form id="profileForm" style="display:flex;flex-direction:column;gap:16px">
+                        <div class="form-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                            <div class="form-group"><label>First Name</label><input type="text" id="pfFirstName"
+                                    class="form-control" /></div>
+                            <div class="form-group"><label>Last Name</label><input type="text" id="pfLastName"
+                                    class="form-control" /></div>
+                        </div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="pfEmail"
+                                class="form-control" /></div>
+                        <div class="form-group"><label>Current Role</label>
+                            <select id="pfRole" class="form-control">
+                                <option value="student">Student / Fresh Graduate</option>
+                                <option value="professional">Working Professional</option>
+                                <option value="career_switcher">Career Switcher</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>Target Job Title</label><input type="text" id="pfTargetJob"
+                                class="form-control" placeholder="e.g., Senior Data Scientist" /></div>
+                        <div class="form-group"><label>LinkedIn Profile URL</label><input type="url" id="pfLinkedin"
+                                class="form-control" placeholder="https://linkedin.com/in/yourprofile" /></div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+
+                    <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--border)">
+                        <h4 style="font-size:0.88rem;font-weight:700;margin-bottom:14px;color:var(--danger)">⚠️ Danger
+                            Zone</h4>
+                        <button class="btn btn-danger btn-sm" id="clearDataBtn">Clear My Analysis Data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/utils.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = requireAuth();
+            if (!user) return;
+            document.getElementById('sidebarUserName').textContent = user.name;
+            document.getElementById('sidebarUserRole').textContent = user.role === 'admin' ? 'Administrator' : 'User';
+            document.getElementById('userAvatarSidebar').textContent = user.name[0].toUpperCase();
+            document.getElementById('profileAvatar').textContent = user.name[0].toUpperCase();
+            document.getElementById('profileName').textContent = user.name;
+            document.getElementById('profileEmail').textContent = user.email;
+            document.getElementById('profileRoleBadge').textContent = user.role === 'admin' ? 'Administrator' : 'User';
+            document.getElementById('logoutBtn').addEventListener('click', e => { e.preventDefault(); Store.remove('ra_current_user'); window.location.href = '../index.html'; });
+            const sidebar = document.getElementById('sidebar');
+            document.getElementById('sidebarToggle')?.addEventListener('click', () => sidebar.classList.toggle('open'));
+            document.getElementById('sidebarClose')?.addEventListener('click', () => sidebar.classList.remove('open'));
+
+            // Load profile data
+            const profileData = Store.get(`ra_profile_${user.id}`, {});
+            const [fname, ...lname] = user.name.split(' ');
+            document.getElementById('pfFirstName').value = fname;
+            document.getElementById('pfLastName').value = lname.join(' ');
+            document.getElementById('pfEmail').value = user.email;
+            document.getElementById('pfRole').value = profileData.role || user.role_type || 'professional';
+            document.getElementById('pfTargetJob').value = profileData.targetJob || '';
+            document.getElementById('pfLinkedin').value = profileData.linkedin || '';
+
+            // User stats
+            const analyses = Store.get('ra_analyses', []).filter(a => a.userId === user.id);
+            document.getElementById('profileAnalyses').textContent = analyses.length;
+            if (analyses.length > 0) {
+                const avg = Math.round(analyses.reduce((s, a) => s + a.overallScore, 0) / analyses.length);
+                const best = Math.max(...analyses.map(a => a.overallScore));
+                document.getElementById('profileAvgScore').textContent = avg + '%';
+                document.getElementById('profileBestScore').textContent = best + '%';
+            }
+
+            // Save profile
+            document.getElementById('profileForm').addEventListener('submit', e => {
+                e.preventDefault();
+                const fname = document.getElementById('pfFirstName').value.trim();
+                const lname = document.getElementById('pfLastName').value.trim();
+                if (!fname) { showToast('First name is required.', 'error'); return; }
+                const updatedUser = { ...user, name: `${fname} ${lname}`.trim() };
+                Store.set('ra_current_user', updatedUser);
+                Store.set(`ra_profile_${user.id}`, {
+                    role: document.getElementById('pfRole').value,
+                    targetJob: document.getElementById('pfTargetJob').value,
+                    linkedin: document.getElementById('pfLinkedin').value,
+                });
+                document.getElementById('profileName').textContent = updatedUser.name;
+                document.getElementById('sidebarUserName').textContent = updatedUser.name;
+                showToast('Profile updated successfully! ✓', 'success');
+            });
+
+            // Clear data
+            document.getElementById('clearDataBtn').addEventListener('click', () => {
+                if (!confirm('Clear all your analysis data? This cannot be undone.')) return;
+                const all = Store.get('ra_analyses', []);
+                Store.set('ra_analyses', all.filter(a => a.userId !== user.id));
+                document.getElementById('profileAnalyses').textContent = '0';
+                document.getElementById('profileAvgScore').textContent = '--';
+                document.getElementById('profileBestScore').textContent = '--';
+                showToast('Data cleared successfully.', 'info');
+            });
+        });
+    </script>
+    <style>
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media(max-width:600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeAI – Smart Resume Analyzer & Job Matcher</title>
+    <meta name="description"
+        content="Analyze your resume with AI, match jobs, find skill gaps and get personalized improvement suggestions to beat ATS systems." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/landing.css" />
+</head>
+
+<body>
+    <!-- ===== AMBIENT ORBS ===== -->
+    <div class="ambient-orb orb-purple"></div>
+    <div class="ambient-orb orb-warm"></div>
+    <div class="ambient-orb orb-teal"></div>
+
+    <!-- ===== PARTICLES BACKGROUND ===== -->
+    <div class="particles" id="particles"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#lg1)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <circle cx="24" cy="22" r="5" fill="#fff" fill-opacity=".2" />
+                        <path d="M22 22l1.5 1.5L26 20" stroke="#fff" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <defs>
+                            <linearGradient id="lg1" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span>Resume<strong>AI</strong></span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="nav-actions">
+                <a href="pages/login.html" class="btn btn-ghost">Login</a>
+                <a href="pages/register.html" class="btn btn-primary">Get Started Free</a>
+            </div>
+            <button class="nav-toggle" id="navToggle">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge animate-fadeup">
+                <span class="badge-dot"></span>
+                Powered by NLP & Machine Learning
+            </div>
+            <h1 class="hero-title animate-fadeup delay-1">
+                Analyze Your Resume.<br />
+                <span class="gradient-text">Land Your Dream Job.</span>
+            </h1>
+            <p class="hero-subtitle animate-fadeup delay-2">
+                Upload your resume, paste a job description, and our AI instantly calculates your ATS match score,
+                identifies skill gaps, and provides personalized improvement suggestions.
+            </p>
+            <div class="hero-actions animate-fadeup delay-3">
+                <a href="pages/register.html" class="btn btn-primary btn-large">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M1 5a1 1 0 011-1h16a1 1 0 011 1v2H1V5zm0 4h18v6a2 2 0 01-2 2H3a2 2 0 01-2-2V9z" />
+                    </svg>
+                    Analyze My Resume
+                </a>
+                <a href="#how-it-works" class="btn btn-ghost btn-large">
+                    <svg viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    See How It Works
+                </a>
+            </div>
+            <div class="hero-stats animate-fadeup delay-4">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50000">0</span><span>+</span>
+                    <span class="stat-label">Resumes Analyzed</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="94">0</span><span>%</span>
+                    <span class="stat-label">Accuracy Rate</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="1200">0</span><span>+</span>
+                    <span class="stat-label">Job Roles Covered</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual animate-fadein delay-2">
+            <div class="score-card floating">
+                <div class="score-ring">
+                    <svg viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(108,99,255,0.15)" stroke-width="10" />
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="url(#scoreGrad)" stroke-width="10"
+                            stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="78"
+                            transform="rotate(-90 60 60)" class="score-arc" />
+                        <defs>
+                            <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#6C63FF" />
+                                <stop offset="100%" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <div class="score-center">
+                        <span class="score-value animate-count" data-target="75">0</span>
+                        <span class="score-pct">%</span>
+                        <span class="score-label">ATS Match</span>
+                    </div>
+                </div>
+                <div class="score-details">
+                    <div class="score-row">
+                        <span>Skills Match</span>
+                        <div class="mini-bar">
+                            <div class="mini-fill" style="width:82%"></div>
+                        </div>
+                        <span class="score-val">82%</span>
+                    </div>
+                    <div class="score-row">
+                        <span>Keywords</span>
+                        <div class="mini-bar">
+                            <div class="mini-fill" style="width:68%"></div>
+                        </div>
+                        <span class="score-val">68%</span>
+                    </div>
+                    <div class="score-row">
+                        <span>Experience</span>
+                        <div class="mini-bar">
+                            <div class="mini-fill" style="width:75%"></div>
+                        </div>
+                        <span class="score-val">75%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-chip-cloud">
+                <span class="skill-chip matched animate-chip delay-1">Python ✓</span>
+                <span class="skill-chip missing animate-chip delay-2">Docker ✗</span>
+                <span class="skill-chip matched animate-chip delay-3">SQL ✓</span>
+                <span class="skill-chip missing animate-chip delay-1">Kubernetes ✗</span>
+                <span class="skill-chip matched animate-chip delay-4">React ✓</span>
+                <span class="skill-chip missing animate-chip delay-2">AWS ✗</span>
+                <span class="skill-chip matched animate-chip delay-3">Git ✓</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <span class="section-tag">What We Offer</span>
+            <h2>Everything You Need to <span class="gradient-text">Land the Job</span></h2>
+            <p>Our AI-powered platform provides comprehensive resume intelligence to help you stand out in today's
+                competitive job market.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" data-delay="0">
+                <div class="feature-icon" style="--c1:#6C63FF;--c2:#3ECFCF">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3>ATS Score Calculator</h3>
+                <p>Instantly see how your resume performs against real ATS algorithms with our TF-IDF powered scoring
+                    engine.</p>
+            </div>
+            <div class="feature-card" data-delay="100">
+                <div class="feature-icon" style="--c1:#FF6584;--c2:#FF9A9E">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h3>Skill Gap Analysis</h3>
+                <p>Identify exactly which skills you're missing for your target role and get curated learning
+                    recommendations.</p>
+            </div>
+            <div class="feature-card" data-delay="200">
+                <div class="feature-icon" style="--c1:#43E97B;--c2:#38F9D7">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                </div>
+                <h3>Keyword Optimization</h3>
+                <p>Get a precise list of missing keywords that ATS systems look for, ranked by importance for your role.
+                </p>
+            </div>
+            <div class="feature-card" data-delay="300">
+                <div class="feature-icon" style="--c1:#F7971E;--c2:#FFD200">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3>Detailed PDF Report</h3>
+                <p>Download a comprehensive analysis report with your scores, gaps, and actionable improvement tips.</p>
+            </div>
+            <div class="feature-card" data-delay="400">
+                <div class="feature-icon" style="--c1:#667EEA;--c2:#764BA2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h3>Course Recommendations</h3>
+                <p>Get personalized course suggestions from top platforms to bridge your skill gaps quickly and
+                    affordably.</p>
+            </div>
+            <div class="feature-card" data-delay="500">
+                <div class="feature-icon" style="--c1:#A8EDEA;--c2:#FED6E3">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3>Resume History</h3>
+                <p>Track your improvement over time with saved analysis history and progress comparison charts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-header">
+            <span class="section-tag">Simple Process</span>
+            <h2>How <span class="gradient-text">ResumeAI</span> Works</h2>
+            <p>Get your resume analysis in under 60 seconds — no technical knowledge required.</p>
+        </div>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                    </svg>
+                </div>
+                <h3>Upload Your Resume</h3>
+                <p>Upload your resume in PDF or DOCX format. Our system extracts and processes the text automatically.
+                </p>
+                <div class="step-connector"></div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h3>Paste Job Description</h3>
+                <p>Enter the job description for the role you're targeting. Our NLP engine will parse all requirements.
+                </p>
+                <div class="step-connector"></div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <h3>AI Analyzes Match</h3>
+                <p>Our ML model using TF-IDF and NLP computes your skill match, keyword relevance, and ATS score.</p>
+                <div class="step-connector"></div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <div class="step-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3>Get Actionable Results</h3>
+                <p>Receive your match score, skill gaps, missing keywords, and personalized improvement suggestions
+                    instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA SECTION ===== -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Optimize Your Resume?</h2>
+            <p>Join thousands of job seekers who have improved their interview callback rate using ResumeAI.</p>
+            <a href="pages/register.html" class="btn btn-white btn-large">
+                Start For Free — No Credit Card Required
+            </a>
+        </div>
+        <div class="cta-glow"></div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo">
+                    <div class="logo-icon small">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <circle cx="16" cy="16" r="16" fill="url(#fLg)" />
+                            <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                                stroke-linecap="round" />
+                            <defs>
+                                <linearGradient id="fLg" x1="0" y1="0" x2="32" y2="32">
+                                    <stop stop-color="#6C63FF" />
+                                    <stop offset="1" stop-color="#3ECFCF" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span>Resume<strong>AI</strong></span>
+                </a>
+                <p>AI-powered resume analysis and job matching platform to help you land your dream job.</p>
+            </div>
+            <div class="footer-links">
+                <div class="footer-col">
+                    <h4>Product</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="pages/register.html">Get Started</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Account</h4>
+                    <a href="pages/login.html">Login</a>
+                    <a href="pages/register.html">Register</a>
+                    <a href="pages/admin.html">Admin Panel</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 ResumeAI. Built with NLP & Machine Learning.</p>
+        </div>
+    </footer>
+
+    <script src="js/landing.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account – ResumeAI</title>
+    <meta name="description"
+        content="Create your free ResumeAI account and start analyzing your resume against job descriptions instantly." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="auth-layout">
+        <div class="auth-left">
+            <a href="../index.html" class="nav-logo auth-brand">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <circle cx="16" cy="16" r="16" fill="url(#alg2)" />
+                        <path d="M9 10h14M9 14h10M9 18h12M9 22h8" stroke="#fff" stroke-width="2"
+                            stroke-linecap="round" />
+                        <defs>
+                            <linearGradient id="alg2" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#6C63FF" />
+                                <stop offset="1" stop-color="#3ECFCF" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <span>Resume<strong>AI</strong></span>
+            </a>
+            <div class="auth-left-content">
+                <h1>Start Your Journey to <span class="gradient-text">Career Success</span></h1>
+                <p>Join 50,000+ job seekers who use ResumeAI to optimize their resumes and land more interviews.</p>
+                <div class="stats-grid">
+                    <div class="mini-stat"><span class="mini-stat-num">94%</span><span class="mini-stat-label">Accuracy
+                            Rate</span></div>
+                    <div class="mini-stat"><span class="mini-stat-num">50K+</span><span class="mini-stat-label">Resumes
+                            Analyzed</span></div>
+                    <div class="mini-stat"><span class="mini-stat-num">3x</span><span class="mini-stat-label">More
+                            Interviews</span></div>
+                    <div class="mini-stat"><span class="mini-stat-num">Free</span><span class="mini-stat-label">To Get
+                            Started</span></div>
+                </div>
+                <div class="auth-features">
+                    <div class="auth-feat"><span class="feat-icon">✓</span> No credit card required</div>
+                    <div class="auth-feat"><span class="feat-icon">✓</span> Instant ATS score analysis</div>
+                    <div class="auth-feat"><span class="feat-icon">✓</span> Personalized suggestions</div>
+                    <div class="auth-feat"><span class="feat-icon">✓</span> Resume history tracking</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <div class="auth-form-container animate-fadeup">
+                <div class="auth-header">
+                    <h2>Create Account</h2>
+                    <p>Already have one? <a href="login.html" class="auth-link">Sign in instead</a></p>
+                </div>
+
+                <form class="auth-form" id="registerForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group" id="fg-fname">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-control" placeholder="John" required />
+                            <span class="form-error">Required</span>
+                        </div>
+                        <div class="form-group" id="fg-lname">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-control" placeholder="Doe" required />
+                            <span class="form-error">Required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" id="fg-email">
+                        <label for="regEmail">Email Address</label>
+                        <input type="email" id="regEmail" class="form-control" placeholder="you@example.com" required />
+                        <span class="form-error">Please enter a valid email.</span>
+                    </div>
+                    <div class="form-group" id="fg-password">
+                        <label for="regPassword">Password</label>
+                        <div class="input-password-wrap">
+                            <input type="password" id="regPassword" class="form-control" placeholder="Min. 8 characters"
+                                required />
+                            <button type="button" class="toggle-pw" id="toggleRegPw">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                    <circle cx="12" cy="12" r="3" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="pwStrength">
+                            <div class="strength-bars">
+                                <div class="strength-bar" id="sb1"></div>
+                                <div class="strength-bar" id="sb2"></div>
+                                <div class="strength-bar" id="sb3"></div>
+                                <div class="strength-bar" id="sb4"></div>
+                            </div>
+                            <span class="strength-label" id="strengthLabel">Enter password</span>
+                        </div>
+                        <span class="form-error">Password must be at least 8 characters.</span>
+                    </div>
+                    <div class="form-group" id="fg-confirm">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Repeat password"
+                            required />
+                        <span class="form-error">Passwords do not match.</span>
+                    </div>
+                    <div class="form-group" id="fg-role">
+                        <label for="userRole">I am a</label>
+                        <select id="userRole" class="form-control">
+                            <option value="student">Student / Fresh Graduate</option>
+                            <option value="professional">Working Professional</option>
+                            <option value="career_switcher">Career Switcher</option>
+                        </select>
+                    </div>
+                    <label class="check-label terms-check">
+                        <input type="checkbox" id="agreeTerms" required />
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#"
+                            class="auth-link">Privacy Policy</a>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-full btn-large" id="registerBtn">
+                        <span id="registerBtnText">Create Free Account</span>
+                        <div class="btn-spinner hidden" id="registerSpinner"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+    <script src="../js/utils.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+
+</html>
